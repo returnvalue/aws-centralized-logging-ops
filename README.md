@@ -32,8 +32,7 @@ The system implements a real-time log delivery pipeline:
     ```bash
     terraform init
     terraform apply -auto-approve
-    
-```
+    ```
 
 ## Verification & Testing
 
@@ -49,16 +48,14 @@ To test the end-to-end logging pipeline:
       --log-group-name /aws/sysops-lab/centralized-logs \
       --log-stream-name test-stream \
       --log-events timestamp=$(date +%s000),message="Test log message for centralization"
-    
-```
+    ```
 
 2.  **Wait for Firehose Delivery:**
     Firehose buffers data (default 300 seconds or 5MB). In LocalStack, you can check the S3 bucket after a short delay:
     ```bash
     awslocal s3 ls s3://centralized-log-archive-bucket --recursive
     aws s3 ls s3://centralized-log-archive-bucket --recursive
-    
-```
+    ```
 
 3.  **Confirm Log Data in S3:**
     Download and inspect a log file from the archival bucket to verify the content.
